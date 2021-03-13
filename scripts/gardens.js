@@ -5,24 +5,27 @@
 ****/
 
 //modules
-// const axios = require("axios");
-// const utilities = require("./utilities");
-const fetch = require(".node-fetch");
+const axios = require("axios")
+const utilities = require("./utilities");
 
-const CITY_URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=community-gardens-and-food-trees&q=&rows=5&sort=mapid&facet=mapid&facet=name&facet=merged_address&facet=notes&facet=food_tree_varieties&facet=public_e_mail&facet=website&facet=geom";
+const GARDENS_URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=community-gardens-and-food-trees&q=&rows=5&sort=mapid&facet=mapid&facet=name&facet=merged_address&facet=notes&facet=food_tree_varieties&facet=public_e_mail&facet=website&facet=geom";
+
+axios.get(GARDENS_URL)
+	// .then(res => utilities.filter(res.data.records, ))
+	.then(res => res.data.records)
+	.then(res => res.map(k => k.fields))
+	.then(res => utilities.filterData(res, "jurisdiction", "Park Board"))
+	.then(res => console.log(res))
+	.catch(res => console.log(res))
+
+// let data = {};
 //
-// let data = (url) => {
-// 	axios.get(url)
-// 	.then((res) => console.log(res.data.records))
-// 	.catch((err) => console.log(err))
+// const getData = (results) => {
+// 	console.log("data extracted");
+// 	data = results;
 // }
-// let a = data(CITY_URL);
-// console.log(a);
-
-const a = await fetch(CITY_URL);
-// console.log(a);
-
-// a.filter(thing => thing.record_timestamp);
-
-// let fil = utilities.filterer(a, "jurisdiction", "Park Board");
-// console.log(fil);
+//
+// utilities.getRaw(GARDENS_URL, (results) => {
+// 	console.log("data recieved");
+// 	getData(results);
+// })
