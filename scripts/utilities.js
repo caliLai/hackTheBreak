@@ -20,7 +20,16 @@ function compare(field, order = 'asc'){
 
     }
 }
+function _search(data, key, keyword){
+    let response = []
+    for(x in data){
+        if(data[x].fields[key].includes(keyword)){
+            response.push(data[x]);
+        }
+    }
+    return response;
+}
 function data_sort(data,field,order = 'asc'){
     return data.sort(compare(field,order));
 }
-export {hourconv, data_sort}
+export {hourconv, data_sort, _search}

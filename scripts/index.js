@@ -44,7 +44,15 @@ function compare(field, order = 'asc'){
 function data_sort(data,field,order = 'asc'){
     return data.sort(compare(field,order));
 }
-
+function _search(data, key, keyword){
+    let response = []
+    for(x in data){
+        if(data[x].fields[key].includes(keyword)){
+            response.push(data[x]);
+        }
+    }
+    return response;
+}
 //-------------------------------------//
 
 
