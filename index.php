@@ -1,3 +1,5 @@
+<?php include_once("index.html"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,14 +10,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
 
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/myBootstrap.css">
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/css/myBootstrap.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 	  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
 	  <link rel="preconnect" href="https://fonts.gstatic.com">
 	  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	  <script src="../scripts/index.js"></script>
+	  <script src="scripts/index.js"></script>
   </head>
 
 <body>
@@ -78,23 +80,6 @@
 
   <script src="https://kit.fontawesome.com/26da0e4274.js" crossorigin="anonymous"></script>
   <!-- <script src="../scripts/utilities.js" type ="text/javascript"></script> -->
-  <script>
-    function checkWidth() {
-      if ($(window).width() < 1050) {
-        $("#main").addClass("row-cols-2");
-        $("#main").removeClass("row-cols-3");
-      } else {
-        $("#main").removeClass("row-cols-2");
-        $("#main").addClass("row-cols-3");
-      }
-    };
-
-    $(document).ready(function () {
-      $(window).resize(function() {
-        checkWidth();
-      }).resize();
-    });
-  </script>
 </body>
 
 </html>

@@ -18,6 +18,11 @@ $(document).ready(function(){
 =======
 $(document).ready(function () {
   // let main = $("#main");
+  $(window)
+    .resize(function () {
+      checkWidth();
+    })
+    .resize();
   getData();
   displayData();
 });
@@ -55,7 +60,24 @@ function compare(field, order = "asc") {
 function data_sort(data, field, order = "asc") {
   return data.sort(compare(field, order));
 }
-
+function _search(data, key, keyword) {
+  let response = [];
+  for (x in data) {
+    if (data[x].fields[key].includes(keyword)) {
+      response.push(data[x]);
+    }
+  }
+  return response;
+}
+function checkWidth() {
+  if ($(window).width() < 1050) {
+    $("#main").addClass("row-cols-2");
+    $("#main").removeClass("row-cols-3");
+  } else {
+    $("#main").removeClass("row-cols-2");
+    $("#main").addClass("row-cols-3");
+  }
+}
 //-------------------------------------//
 
 async function getData() {
