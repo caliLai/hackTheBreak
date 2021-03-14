@@ -8,13 +8,15 @@
 const axios = require("axios")
 const utilities = require("./utilities");
 
-const GARDENS_URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=community-gardens-and-food-trees&q=&rows=5&sort=mapid&facet=mapid&facet=name&facet=merged_address&facet=notes&facet=food_tree_varieties&facet=public_e_mail&facet=website&facet=geom";
+const MARKETS_URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=community-food-markets-and-farmers-markets&q=&facet=MarktName-Location-Host&facet=MergedAddress&facet=Open&facet=Close&facet=MarketOperator&facet=NumberOfVendors&facet=Offerings";
 
-axios.get(GARDENS_URL)
+axios.get(MARKETS_URL)
 	// .then(res => utilities.filter(res.data.records, ))
 	.then(res => res.data.records)
 	.then(res => res.map(k => k.fields))
-	.then(res => utilities.filterData(res, "jurisdiction", "Park Board"))
+	// .then(res => res.filter(k => k.markettype == "Farmers Market"))
+	// .then(res => )
+	.then(res => utilities.filterData(res, "markettype", "Farmers Market"))
 	.then(res => console.log(res))
 	.catch(err => console.log(err))
 
