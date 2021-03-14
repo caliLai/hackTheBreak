@@ -18,14 +18,16 @@ $(document).ready(function () {
 
   // let sorted = data_sort(getData(), "markettype");
   // console.log(sorted);
-  getData("mergedaddress");
+  // getData("mergedaddress");
   $("select").change(function() {
 	  console.log($("select").val());
 	  // return $("select").val();
 	  // r_sorted = data_sort(records, $("select").val());
-	  // displayData(data_sort(getData(), $("select").val()));
 	  getData($("select").val());
+	  // getData($("select").val())
+	  // 	.then(r => displayData(data_sort(r,$("select").val())))
   });
+
 });
 
 
@@ -87,13 +89,15 @@ async function getData(field) {
   const res = await fetch(MARKETS_URL);
   const data = await res.json();
 
+
   // console.log(data.records);
   // return data.records;
- await displayData(data_sort(data.records, field));
+	displayData(data_sort(data.records, field));
+
 }
 
 function displayData(records) {
-  $("main").empty();
+	$("main").empty();
   for (let row in records) {
     if (
       !("marketname_location_host" in records[row].fields) ||
