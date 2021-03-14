@@ -42,7 +42,7 @@ async function getData() {
 			</div>
 		</div>
 		`
-		$("main").attr("class", "row row-cols-1 row-cols-md-2 g-4");
+		$("main").attr("class", "row row-cols-1 row-cols-md-3 g-4");
 		$("main").append(card);
 		// console.log(row, data.records[row].fields.open);
 	}
