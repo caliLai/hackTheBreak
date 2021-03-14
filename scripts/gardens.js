@@ -16,7 +16,7 @@ axios.get(GARDENS_URL)
 	.then(res => res.map(k => k.fields))
 	.then(res => utilities.filterData(res, "jurisdiction", "Park Board"))
 	.then(res => console.log(res))
-	.catch(res => console.log(res))
+	.catch(err => console.log(err))
 
 // let data = {};
 //

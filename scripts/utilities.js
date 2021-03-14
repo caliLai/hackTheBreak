@@ -21,7 +21,7 @@ const getRaw = (url, callback) => {
 const filterData = (data, key, value) => {
 	return new Promise((resolve, reject) => {
 		let filtered = data.filter(garden => {
-			garden[key] == value;
+			garden.key == value;
 		})
 		resolve(filtered);
 	})
