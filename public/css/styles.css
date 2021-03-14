@@ -9,10 +9,14 @@
 
 .jumbotron {
   background-image: url("../images/banner.png");
-  height: 70vh;
+  width: 100vw;
+  padding-top: 100px;
+  padding-bottom: 100px;
   background-size: cover;
   background-position: center bottom;
   border-radius: 0px;
+  filter: drop-shadow(0 0 1em black);
+  margin-bottom: 30px;
 }
 
 .title {
@@ -25,7 +29,7 @@
 .otherTitle {
   font-family: "Ubuntu", sans-serif;
   text-align: center;
-  color: #d3d5c5;
+  color: #adf5ff;
   font-size: 3em;
 }
 
@@ -34,30 +38,74 @@ input[type="text"]:focus {
 }
 
 .search {
-  border-radius: 25px;
+  background-color: white;
+  border-radius: 50px;
   border: none;
-  height: 35px;
-  width: 200px;
+  height: auto;
+  width: 100%;
+  padding: 15px;
+  font-size: 25px;
+}
+
+#market {
+  font-family: "Ubuntu", sans-serif;
+  border: none;
+  width: 90%;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#market:focus {
+  outline: none;
+}
+
+#market-select {
+  font-family: "Ubuntu", sans-serif;
+  width: 50%;
+  padding: 15px;
+  font-size: 25px;
+}
+
+#search-button {
+  border: none;
+  background-color: white;
+  border-radius: 50px;
 }
 
 .filtersortSearch h2 {
   font-family: "Ubuntu", sans-serif;
-  font-size: 2.25em;
+  font-size: 3em;
   color: #a7a7a7;
 }
 
+.filtersortSearch {
+  margin-bottom: 50px;
+}
+
 #main {
-  font-size: 1.5em;
+  margin-left: 10%;
+  margin-right: 10%;
+  font-size: 1.25em;
+  font-family: "Ubuntu", sans-serif;
 }
 
 body {
   overflow-x: hidden;
 }
 
+a {
+  text-decoration: none;
+  color: rgb(160, 191, 238);
+}
+
 select {
   width: 15%;
   font-size: 1.25em;
   border-radius: 20px;
+}
+
+.filler {
+  height: 100px;
 }
 
 .footer {
