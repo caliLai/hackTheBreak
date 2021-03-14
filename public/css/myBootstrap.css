@@ -1,9 +1,12 @@
 .navbar-brand {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 1.5em;
-    display: grid;
-    justify-content: center;
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+
   }
+
+.navbar{
+  background-color: #A7A7A7;
+}
 
 .jumbotron {
     background-image: url("../images/banner.png");
@@ -13,13 +16,29 @@
     border-radius: 0px;
 }
 
-.display-4{
-  font-family: 'Bebas Neue', cursive;
+.title{
+  font-family: 'Ubuntu', sans-serif;
   text-align: center;
-
+  color: white;
+  font-size: 5em;
 }
 
-.lead{
+.otherTitle{
+  font-family: 'Ubuntu', sans-serif;
   text-align: center;
+  color: #d3d5c5;
+  font-size: 3em;
+}
+
+
+.label{
+  color: #d3d5c5;
+}
+
+.search{
+  border-radius: 25px;
+  border: none;
+  height: 35px;
+  width: 200px;
 }
 
