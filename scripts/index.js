@@ -13,7 +13,6 @@
 $(document).ready(function(){
 	// let main = $("#main");
 	getData();
-	displayData();
 })
 
 //-------------------------------------//
@@ -54,7 +53,12 @@ async function getData() {
 	const data = await res.json();
 	records = data.records;
 
-	let r_sorted = data_sort(records, "marketname_location_host");
+	let field = $("select").change(function() {
+		// console.log($("#market-select").val());
+		return $("select").val();
+	});
+
+	let r_sorted = data_sort(records, field);
 
 	displayData(r_sorted);
 }
