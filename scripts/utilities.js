@@ -5,6 +5,14 @@ const filterer = (data, key, value) => {
 }
 
 filterer()
+function hourconv(_int){
+    if (_int.includes('am')){
+        _int = parseInt(_int.replace('am'));
+    }else if(_int.includes('pm')){
+        _int = parseInt(_int.replace('pm'))+12;
+    }
+    return _int;
+}
 function compare(field, order = 'asc'){
     return function innerSort(a,b){
         let A,B;

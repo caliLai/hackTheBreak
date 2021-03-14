@@ -5,7 +5,11 @@ let data = {};
 function handle_db(results){
     console.log("recieved data");
     data = results;
-    console.log(data)
+    //convert am/pm to 24-hour
+    for(x in data){
+        data[x].fields.open = fcns.hourconv(data[x].fields.open)
+        data[x].fields.close = fcns.hourconv(data[x].fields.close)
+    }
 }
 
 market.db_update(URL, function(results){
