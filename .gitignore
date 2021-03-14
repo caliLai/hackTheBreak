@@ -2,3 +2,4 @@
 *.env
 node_modules/
 bootstrap.css
+/scripts/firebase_api.js
