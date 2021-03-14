@@ -1,5 +1,9 @@
 *.DS_Store
 *.env
 node_modules/
+package.json
 bootstrap.css
 /scripts/firebase_api.js
+/scripts/functions.js
+bootstrap.css
+
