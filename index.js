@@ -4,10 +4,21 @@ const fs = require('fs');
 const URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=community-food-markets-and-farmers-markets&rows=100";
 
 var data = {};
-function handle_db(results){
+/*function handle_db(results){
     console.log("recieved data");
     data = fcns.data_sort(results,'day');
+}*/
+let data = {};
+function handle_db(results){
+    console.log("recieved data");
+    data = results;
+    //convert am/pm to 24-hour
+    for(x in data){
+        if(data[x].fields.open != undefined)    data[x].fields.open = fcns.hourconv(data[x].fields.open)
+        if(data[x].fields.close != undefined)   data[x].fields.close = fcns.hourconv(data[x].fields.close)
+    }
 }
+
 market.db_update(URL, function(results){
     console.log('recieved');
     handle_db(results);
@@ -20,15 +31,15 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 rl.on('line', (input) => {
-    test = input.split(' ');
-    if(test[0] == "exit"){
+    if(input == "exit"){
         console.log("Closing application");
         rl.close();
         return 0;
     }
-    if(test[0] == "output"){
+    if(input == "output"){
         console.log(data);
     }
+<<<<<<< HEAD
     if(test[0] == "open"){
         fcns.is_open(data);
     }
@@ -36,6 +47,13 @@ rl.on('line', (input) => {
         console.log('sorting');
         data = fcns.data_sort(data, 'day');
         console.log('done');
+=======
+    if(input == "sort"){
+        rl.question("sort by:", (answer) => {
+            data = fcns.data_sort(data, answer)
+            console.log(data);
+        })
+>>>>>>> 047bfac282384b8d149f1a3f11a3f70753b3e3bd
     }
     if(input == "search"){
         rl.question("search location host:", (answer) => {

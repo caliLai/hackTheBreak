@@ -17,11 +17,8 @@ function compare(field, order = 'asc'){
         if(A > B) comp = 1
         else if(A < B) comp = -1
         return (order === 'desc') ? (comp *= -1) : comp;
-    
+
     }
-}
-function data_sort(data,field,order = 'asc'){
-    return data.sort(compare(field,order));
 }
 function _search(data, key, keyword){
     let response = []
@@ -32,9 +29,7 @@ function _search(data, key, keyword){
     }
     return response;
 }
-module.exports = {
-	hourconv,
-	data_sort,
-    _search,
-
+function data_sort(data,field,order = 'asc'){
+    return data.sort(compare(field,order));
 }
+export {hourconv, data_sort, _search}
