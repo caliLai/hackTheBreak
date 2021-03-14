@@ -10,15 +10,27 @@
 
 $(document).ready(function () {
   // let main = $("#main");
-  $(window).resize(function () {
-    checkWidth();
+
+  $(window)
+    .resize(function () {
+      checkWidth();
+    })
+    .resize();
+
+  // let sorted = data_sort(getData(), "markettype");
+  // console.log(sorted);
+  // getData("mergedaddress");
+  $("select").change(function() {
+	  console.log($("select").val());
+	  // return $("select").val();
+	  // r_sorted = data_sort(records, $("select").val());
+	  getData($("select").val());
+	  // getData($("select").val())
+	  // 	.then(r => displayData(data_sort(r,$("select").val())))
   });
-  $(window).scroll(function () {
-    checkWidth();
-  });
-  getData();
-  displayData();
+
 });
+
 
 //-------------------------------------//
 
@@ -74,18 +86,21 @@ function checkWidth() {
 }
 //-------------------------------------//
 
-async function getData() {
+async function getData(field) {
   const MARKETS_URL =
     "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=community-food-markets-and-farmers-markets&q=&facet=MarktName-Location-Host&facet=MergedAddress&facet=Open&facet=Close&facet=MarketOperator&facet=NumberOfVendors&facet=Offerings&rows=100";
   const res = await fetch(MARKETS_URL);
   const data = await res.json();
-  records = data.records;
 
-  let r_sorted = data_sort(records, "marketname_location_host");
-  displayData(r_sorted);
+
+  // console.log(data.records);
+  // return data.records;
+	displayData(data_sort(data.records, field));
+
 }
 
 function displayData(records) {
+	$("main").empty();
   for (let row in records) {
     if (
       !("marketname_location_host" in records[row].fields) ||
