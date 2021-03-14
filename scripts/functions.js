@@ -85,8 +85,9 @@ function is_open(arg_open, arg_close, arg_day, arg_month){
 }
 function compare(field, order = 'asc'){
     return function innerSort(a,b){
-        const A = (typeof a[field] === 'string') ? a[field].toUpperCase() : a[field];
-        const B = (typeof a[field] === 'string') ? a[field].toUpperCase() : a[field];
+        let A,B;
+        A = (typeof a.fields[field] === 'string') ? a.fields[field].toUpperCase() : a.fields[field];
+        B = (typeof b.fields[field] === 'string') ? b.fields[field].toUpperCase() : b.fields[field];
         let comp = 0
         if(A > B) comp = 1
         else if(A < B) comp = -1
@@ -95,8 +96,7 @@ function compare(field, order = 'asc'){
     }
 }
 function data_sort(data,field,order = 'asc'){
-    data.sort(compare(field,order));
-    return data
+    return data.sort(compare(field,order));
 }
 module.exports = {
     is_open,
