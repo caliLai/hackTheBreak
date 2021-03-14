@@ -3,7 +3,7 @@ const fcns = require("./scripts/functions.js");
 const fs = require('fs');
 const URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=community-food-markets-and-farmers-markets&rows=100";
 
-let data = {};
+var data = {};
 function handle_db(results){
     console.log("recieved data");
     data = results;
@@ -29,18 +29,24 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 rl.on('line', (input) => {
-    if(input == "exit"){
+    test = input.split(' ');
+    if(test[0] == "exit"){
         console.log("Closing application");
         rl.close();
         return 0;
     }
-    if(input == "output"){
+    if(test[0] == "output"){
         console.log(data);
     }
-    if(input == "open"){
+    if(test[0] == "open"){
         fcns.is_open(data);
     }
-    if(input == "check"){
+    if(test[0] == "check"){
         availability_check(data[0]);
+    }
+    if(test[0] == "sort"){
+        console.log('sorting');
+        data = fcns.data_sort(data, test[1], test[2]);
+        console.log('done');
     }
 })

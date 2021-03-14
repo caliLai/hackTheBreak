@@ -6,6 +6,12 @@ function hourconv(_int){
     }
     return _int;
 }
+function Months(arg_month){
+    if(arg_month != undefined){
+        let arg_months = arg_month.split(' ').join('').split('-');
+    }
+    return arg_months;
+}
 function is_open(arg_open, arg_close, arg_day, arg_month){
     let days = {
         Sunday: 0,
@@ -47,18 +53,17 @@ function is_open(arg_open, arg_close, arg_day, arg_month){
     let day = today.getDay();
     let month = today.getMonth();
     */
-    if (arg_open ===undefined)      arg_open = "-1";
+    if (arg_open ===undefined)      arg_open = "-1";    // if unavailable, use 01
     if (arg_close === undefined)    arg_close = "-1";
     //check if the month is within range
     //if(arg_day === undefined || arg_month === undefined)    return "unavailable";
-    //conversion from am/pm to 24-hr
-    arg_close = hourconv(arg_close);
-    arg_open = hourconv(arg_open);
+    arg_close = hourconv(arg_close);                    //conversion from am/pm to 24-hr
+    arg_open = hourconv(arg_open);                      //conversion from am/pm to 24-hr
     //-------------------------------
     //remove whitespace inbetween
-    if(arg_month != undefined){
-        arg_months = arg_month.split(' ').join('').split('-');
-    }
+    let arg_months = Months(arg_month);
+    
+    
     // if there are induvidual days listed
     if(arg_day != undefined){
         if(arg_day.includes(',')){
@@ -77,8 +82,23 @@ function is_open(arg_open, arg_close, arg_day, arg_month){
     console.log(arg_month);
     console.log(months[arg_months[0]]+' '+months[arg_months[1]]);
 
+}
+function compare(field, order = 'asc'){
+    return function innerSort(a,b){
+        const A = (typeof a[field] === 'string') ? a[field].toUpperCase() : a[field];
+        const B = (typeof a[field] === 'string') ? a[field].toUpperCase() : a[field];
+        let comp = 0
+        if(A > B) comp = 1
+        else if(A < B) comp = -1
+        return (order === 'desc') ? (comp *= -1) : comp;
     
+    }
+}
+function data_sort(data,field,order = 'asc'){
+    data.sort(compare(field,order));
+    return data
 }
 module.exports = {
     is_open,
+    data_sort
 }
