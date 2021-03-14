@@ -7,8 +7,8 @@ function handle_db(results){
     data = results;
     //convert am/pm to 24-hour
     for(x in data){
-        data[x].fields.open = fcns.hourconv(data[x].fields.open)
-        data[x].fields.close = fcns.hourconv(data[x].fields.close)
+        if(data[x].fields.open != undefined)    data[x].fields.open = fcns.hourconv(data[x].fields.open)
+        if(data[x].fields.close != undefined)   data[x].fields.close = fcns.hourconv(data[x].fields.close)
     }
 }
 
@@ -16,7 +16,6 @@ market.db_update(URL, function(results){
     console.log('recieved');
     handle_db(results);
 })
-fcns.is_open();
 //console commands
 
 const readline = require('readline');
@@ -32,5 +31,11 @@ rl.on('line', (input) => {
     }
     if(input == "output"){
         console.log(data);
+    }
+    if(input == "sort"){
+        rl.question("sort by:", (answer) => {
+            data = fcns.data_sort(data, answer)
+            console.log(data);
+        })
     }
 })
