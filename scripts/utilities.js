@@ -23,8 +23,4 @@ function compare(field, order = 'asc'){
 function data_sort(data,field,order = 'asc'){
     return data.sort(compare(field,order));
 }
-module.exports = {
-	hourconv,
-	data_sort,
-
-}
+export {hourconv, data_sort}
