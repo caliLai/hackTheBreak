@@ -1,5 +1,5 @@
 const market = require("./scripts/markets.js");
-const fcns = require("./scripts/functions.js");
+const fcns = require("./scripts/utilities.js");
 const fs = require('fs');
 const URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=community-food-markets-and-farmers-markets&rows=5";
 
