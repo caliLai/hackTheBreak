@@ -10,15 +10,24 @@
 
 $(document).ready(function () {
   // let main = $("#main");
-  $(window).resize(function () {
-    checkWidth();
+  $(window)
+    .resize(function () {
+      checkWidth();
+    })
+    .resize();
+
+  // let sorted = data_sort(getData(), "markettype");
+  // console.log(sorted);
+  getData("mergedaddress");
+  $("select").change(function() {
+	  console.log($("select").val());
+	  // return $("select").val();
+	  // r_sorted = data_sort(records, $("select").val());
+	  // displayData(data_sort(getData(), $("select").val()));
+	  getData($("select").val());
   });
-  $(window).scroll(function () {
-    checkWidth();
-  });
-  getData();
-  displayData();
 });
+
 
 //-------------------------------------//
 
@@ -65,27 +74,26 @@ function checkWidth() {
   if ($(window).width() < 1050) {
     $("#main").addClass("row-cols-2");
     $("#main").removeClass("row-cols-3");
-    $("main").css("font-size", "2.5em");
   } else {
     $("#main").removeClass("row-cols-2");
     $("#main").addClass("row-cols-3");
-    $("main").css("font-size", "1.5em");
   }
 }
 //-------------------------------------//
 
-async function getData() {
+async function getData(field) {
   const MARKETS_URL =
     "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=community-food-markets-and-farmers-markets&q=&facet=MarktName-Location-Host&facet=MergedAddress&facet=Open&facet=Close&facet=MarketOperator&facet=NumberOfVendors&facet=Offerings&rows=100";
   const res = await fetch(MARKETS_URL);
   const data = await res.json();
-  records = data.records;
 
-  let r_sorted = data_sort(records, "marketname_location_host");
-  displayData(r_sorted);
+  // console.log(data.records);
+  // return data.records;
+ await displayData(data_sort(data.records, field));
 }
 
 function displayData(records) {
+  $("main").empty();
   for (let row in records) {
     if (
       !("marketname_location_host" in records[row].fields) ||
@@ -115,13 +123,7 @@ function displayData(records) {
 			</div>
 		</div>
 		`;
-    if ($(window).width() < 1050) {
-      $("main").attr("class", "row row-cols-2 g-4");
-      $("main").css("font-size", "2.5em");
-    } else {
-      $("main").attr("class", "row row-cols-3 g-4");
-      $("main").css("font-size", "1.5em");
-    }
+    $("main").attr("class", "row row-cols-2 g-4 bigText");
     $("main").attr("id", "main");
     $("main").append(card);
     // console.log(row, records[row].fields.open);
