@@ -1,32 +1,17 @@
-const firebase = require('firestore');
-
-function add(frebaseConfig, db, Data){
-    var ref = db.collection("market_farmer");
-    
-    ref.add({
-        name: Data.fields.marketname_location_host,
-        location: Data.fields.mergeaddress,
-        open: hourconv(data.fields.open),
-        close: hourconv(data.fields.close),
-        marketOperator: Data.fields.marketoperator,
-        vendors: data.fields.numberofvendors,
-        offering: data.fields.offering
-    })
-
-}
 function hourconv(_int){
     if (_int.includes('am')){
         _int = parseInt(_int.replace('am'));
     }else if(_int.includes('pm')){
         _int = parseInt(_int.replace('pm'))+12;
     }
+    return _int;
 }
 function is_open(arg_open, arg_close, arg_day, arg_month){
     let days = {
         Sunday: 0,
         Monday: 1,
         Tuesday: 2,
-        Wednsday: 3,
+        Wednesday: 3,
         Thursday: 4,
         Friday: 5,
         Saturday: 6
@@ -67,16 +52,8 @@ function is_open(arg_open, arg_close, arg_day, arg_month){
     //check if the month is within range
     //if(arg_day === undefined || arg_month === undefined)    return "unavailable";
     //conversion from am/pm to 24-hr
-    if (arg_open.includes('am')){
-        arg_open = parseInt(arg_open.replace('am'));
-    }else if(arg_open.includes('pm')){
-        arg_open = parseInt(arg_open.replace('pm'))+12;
-    }
-    if (arg_close.includes('am')){
-        arg_close = parseInt(arg_close.replace('am'));
-    }else if(arg_close.includes('pm')){
-        arg_close = parseInt(arg_close.replace('pm'))+12;
-    }
+    arg_close = hourconv(arg_close);
+    arg_open = hourconv(arg_open);
     //-------------------------------
     //remove whitespace inbetween
     if(arg_month != undefined){
@@ -96,12 +73,12 @@ function is_open(arg_open, arg_close, arg_day, arg_month){
     //console output
     console.log(arg_open);
     console.log(arg_close);
-    console.log(arg_day);
+    console.log(days[arg_day]);
     console.log(arg_month);
     console.log(months[arg_months[0]]+' '+months[arg_months[1]]);
 
     
 }
 module.exports = {
-    is_open
+    is_open,
 }

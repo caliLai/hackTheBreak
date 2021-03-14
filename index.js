@@ -9,14 +9,12 @@ function handle_db(results){
     data = results;
 }
 function availability_check(data){
-    for(x in data){
-        let open = data[x].fields.open;
-        let close = data[x].fields.close;
-        let day = data[x].fields.day;
-        let month = data[x].fields.months;
-        
-        fcns.is_open(open,close,day,month);
-    }
+    let open = data.fields.open;
+    let close = data.fields.close;
+    let day = data.fields.day;
+    let month = data.fields.months;
+    
+    fcns.is_open(open,close,day,month);
     console.log("done");
 }
 market.db_update(URL, function(results){
@@ -26,7 +24,6 @@ market.db_update(URL, function(results){
 //console commands
 
 const readline = require('readline');
-const { add } = require("lodash");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -44,14 +41,6 @@ rl.on('line', (input) => {
         fcns.is_open(data);
     }
     if(input == "check"){
-        availability_check(data);
-    }
-    if(input == "convert"){
-        add(firebaseConfig, db, data);
+        availability_check(data[0]);
     }
 })
-
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = fs.readFileSync("config.json");
-const app = firebase.initializeApp(firebaseConfig)
-const db = firebase.firestore(app);
