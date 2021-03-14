@@ -5,8 +5,8 @@
 ****/
 
 //modules
-const axios = require("axios")
-const utilities = require("./utilities");
+const axios = require("axios");
+// const utilities = require("./utilities");
 
 const MARKETS_URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=community-food-markets-and-farmers-markets&q=&facet=MarktName-Location-Host&facet=MergedAddress&facet=Open&facet=Close&facet=MarketOperator&facet=NumberOfVendors&facet=Offerings";
 
