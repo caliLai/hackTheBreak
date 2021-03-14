@@ -8,13 +8,26 @@
 const axios = require("axios");
 // const utilities = require("./utilities");
 
-const CITY_URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=community-gardens-and-food-trees&q=&rows=5&sort=mapid&facet=mapid&facet=name&facet=merged_address&facet=notes&facet=food_tree_varieties&facet=public_e_mail&facet=website&facet=geom";
+const MARKETS_URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=community-food-markets-and-farmers-markets&q=&facet=MarktName-Location-Host&facet=MergedAddress&facet=Open&facet=Close&facet=MarketOperator&facet=NumberOfVendors&facet=Offerings";
 
-let data = (url) => {
-	axios.get(url)
-		.then((res) => console.log(res.data.records))
-		.catch((err) => console.log(err))
-}
+axios.get(MARKETS_URL)
+	// .then(res => utilities.filter(res.data.records, ))
+	.then(res => res.data.records)
+	.then(res => res.map(k => k.fields))
+	// .then(res => res.filter(k => k.markettype == "Farmers Market"))
+	// .then(res => )
+	.then(res => utilities.filterData(res, "markettype", "Farmers Market"))
+	.then(res => console.log(res))
+	.catch(err => console.log(err))
 
-data(CITY_URL).filter(thing => thing.jurisdiction);
-
+// let data = {};
+//
+// const getData = (results) => {
+// 	console.log("data extracted");
+// 	data = results;
+// }
+//
+// utilities.getRaw(GARDENS_URL, (results) => {
+// 	console.log("data recieved");
+// 	getData(results);
+// })

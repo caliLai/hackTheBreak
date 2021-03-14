@@ -17,7 +17,7 @@ function compare(field, order = 'asc'){
         if(A > B) comp = 1
         else if(A < B) comp = -1
         return (order === 'desc') ? (comp *= -1) : comp;
-    
+
     }
 }
 function data_sort(data,field,order = 'asc'){
