@@ -78,6 +78,23 @@
 
   <script src="https://kit.fontawesome.com/26da0e4274.js" crossorigin="anonymous"></script>
   <!-- <script src="../scripts/utilities.js" type ="text/javascript"></script> -->
+  <script>
+    function checkWidth() {
+      if ($(window).width() < 1050) {
+        $("#main").addClass("row-cols-2");
+        $("#main").removeClass("row-cols-3");
+      } else {
+        $("#main").removeClass("row-cols-2");
+        $("#main").addClass("row-cols-3");
+      }
+    };
+
+    $(document).ready(function () {
+      $(window).resize(function() {
+        checkWidth();
+      }).resize();
+    });
+  </script>
 </body>
 
 </html>
