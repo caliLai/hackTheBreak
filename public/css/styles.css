@@ -99,6 +99,10 @@ select {
   border-radius: 20px;
 }
 
+.filler {
+  height: 100px;
+}
+
 .footer {
   bottom: 0;
   width: 100%;
