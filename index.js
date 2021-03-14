@@ -49,4 +49,10 @@ rl.on('line', (input) => {
         data = fcns.data_sort(data, 'day');
         console.log('done');
     }
+    if(input == "search"){
+        rl.question("search location host:", (answer) => {
+            let response = fcns._search(data, 'marketname_location_host', answer);
+            console.log(response); 
+        })
+    }
 })
