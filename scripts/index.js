@@ -10,6 +10,12 @@
 
 $(document).ready(function () {
   // let main = $("#main");
+  $(window).resize(function () {
+    checkWidth();
+  });
+  $(window).scroll(function () {
+    checkWidth();
+  });
   getData();
   displayData();
 });
@@ -46,14 +52,25 @@ function compare(field, order = "asc") {
 function data_sort(data, field, order = "asc") {
   return data.sort(compare(field, order));
 }
-function _search(data, key, keyword){
-    let response = []
-    for(x in data){
-        if(data[x].fields[key].includes(keyword)){
-            response.push(data[x]);
-        }
+function _search(data, key, keyword) {
+  let response = [];
+  for (x in data) {
+    if (data[x].fields[key].includes(keyword)) {
+      response.push(data[x]);
     }
-    return response;
+  }
+  return response;
+}
+function checkWidth() {
+  if ($(window).width() < 1050) {
+    $("#main").addClass("row-cols-2");
+    $("#main").removeClass("row-cols-3");
+    $("main").css("font-size", "2.5em");
+  } else {
+    $("#main").removeClass("row-cols-2");
+    $("#main").addClass("row-cols-3");
+    $("main").css("font-size", "1.5em");
+  }
 }
 //-------------------------------------//
 
@@ -65,7 +82,6 @@ async function getData() {
   records = data.records;
 
   let r_sorted = data_sort(records, "marketname_location_host");
-
   displayData(r_sorted);
 }
 
@@ -99,7 +115,13 @@ function displayData(records) {
 			</div>
 		</div>
 		`;
-    $("main").attr("class", "row row-cols-2 g-4 bigText");
+    if ($(window).width() < 1050) {
+      $("main").attr("class", "row row-cols-2 g-4");
+      $("main").css("font-size", "2.5em");
+    } else {
+      $("main").attr("class", "row row-cols-3 g-4");
+      $("main").css("font-size", "1.5em");
+    }
     $("main").attr("id", "main");
     $("main").append(card);
     // console.log(row, records[row].fields.open);
