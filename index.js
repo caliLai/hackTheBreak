@@ -1,6 +1,13 @@
 const market = require("./scripts/markets.js");
 const fcns = require("./scripts/utilities.js");
+const fs = require('fs');
 const URL = "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=community-food-markets-and-farmers-markets&rows=100";
+
+var data = {};
+/*function handle_db(results){
+    console.log("recieved data");
+    data = fcns.data_sort(results,'day');
+}*/
 let data = {};
 function handle_db(results){
     console.log("recieved data");
@@ -32,10 +39,26 @@ rl.on('line', (input) => {
     if(input == "output"){
         console.log(data);
     }
+<<<<<<< HEAD
+    if(test[0] == "open"){
+        fcns.is_open(data);
+    }
+    if(test[0] == "sort"){
+        console.log('sorting');
+        data = fcns.data_sort(data, 'day');
+        console.log('done');
+=======
     if(input == "sort"){
         rl.question("sort by:", (answer) => {
             data = fcns.data_sort(data, answer)
             console.log(data);
+        })
+>>>>>>> 047bfac282384b8d149f1a3f11a3f70753b3e3bd
+    }
+    if(input == "search"){
+        rl.question("search location host:", (answer) => {
+            let response = fcns._search(data, 'marketname_location_host', answer);
+            console.log(response); 
         })
     }
 })
